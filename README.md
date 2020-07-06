@@ -8,7 +8,7 @@ This pub lets you make a widget slider (automatic/manual sliding) with full cust
 
 ## Usage
 
-[Example](https://github.com/JayTWWM/Image-Slider-Flutter/blob/master/example/example_app.dart)
+[Example](https://github.com/JayTWWM/Image-Slider-Flutter/blob/master/example/example.dart)
 
 To use this package :
 
