@@ -5,3 +5,7 @@
 ## [1.0.1] - July 18, 2020.
 
 * Now with tab indicators and tabController customisations you can also make walkthrough and many other widgets!
+
+## [1.0.2] - July 18, 2020.
+
+* Now with tab indicators and tabController customisations you can also make walkthrough and many other widgets!
