@@ -2,19 +2,44 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 
 class ImageSlider extends StatefulWidget {
+  /// Children in slideView to slide
   final List<Widget> children;
-  bool autoSlide;
-  bool allowManualSlide;
-  Curve curve;
-  Duration duration;
+
+  /// If automatic sliding is required
+  final bool autoSlide;
+
+  /// If manual sliding is required
+  final bool allowManualSlide;
+
+  /// Animation curves of sliding
+  final Curve curve;
+
+  /// Time for automatic sliding
+  final Duration duration;
+
+  /// Width of the slider
   final double width;
+
+  /// Height of the slider
   final double height;
-  bool showTabIndicator;
-  Color tabIndicatorColor;
-  Color tabIndicatorSelectedColor;
-  double tabIndicatorSize;
-  double tabIndicatorHeight;
-  TabController tabController;
+
+  /// Shows the tab indicating circles at the bottom
+  final bool showTabIndicator;
+
+  /// Cutomize tab's colors
+  final Color tabIndicatorColor;
+
+  /// Customize selected tab's colors
+  final Color tabIndicatorSelectedColor;
+
+  /// Size of the tab indicator circles
+  final double tabIndicatorSize;
+
+  /// Height of the indicators from the bottom
+  final double tabIndicatorHeight;
+
+  /// tabController for walkthrough or other implementations
+  final TabController tabController;
 
   ImageSlider(
       {@required this.children,
@@ -28,7 +53,7 @@ class ImageSlider extends StatefulWidget {
       this.allowManualSlide = true,
       this.autoSlide = false,
       this.showTabIndicator = false,
-      this.tabController,
+      @required this.tabController,
       this.duration = const Duration(seconds: 3)});
 
   @override
@@ -37,10 +62,9 @@ class ImageSlider extends StatefulWidget {
 
 class _ImageSliderState extends State<ImageSlider>
     with SingleTickerProviderStateMixin {
+  /// Setting timer and physics on init!
   @override
   void initState() {
-    myTabController =
-        TabController(length: widget.children.length, vsync: this);
     if (widget.autoSlide) {
       timer = Timer.periodic(widget.duration, (Timer t) {
         widget.tabController.animateTo(
@@ -56,15 +80,13 @@ class _ImageSliderState extends State<ImageSlider>
     super.initState();
   }
 
+//Declared Timer and physics.
   Timer timer;
   ScrollPhysics scrollPhysics;
-  TabController myTabController;
 
   @override
   Widget build(BuildContext context) {
-    if (widget.tabController == null) {
-      widget.tabController = myTabController;
-    }
+    // Container has a stack with the tab indicators and the tab bar view!
     return Container(
         width: widget.width,
         height: widget.height,
