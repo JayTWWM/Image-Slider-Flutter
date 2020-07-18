@@ -25,12 +25,43 @@ To use this package :
 
 ```dart
 ImageSlider(
+  /// Shows the tab indicating circles at the bottom
+  showTabIndicator: false,
+
+  /// Cutomize tab's colors
+  tabIndicatorColor: Colors.lightBlue,
+
+  /// Customize selected tab's colors
+  tabIndicatorSelectedColor: Color.fromARGB(255, 0, 0, 255),
+
+  /// Height of the indicators from the bottom
+  tabIndicatorHeight: 16,
+
+  /// Size of the tab indicator circles
+  tabIndicatorSize: 16,
+
+  /// tabController for walkthrough or other implementations
+  tabController: tabController,
+
+  /// Animation curves of sliding
   curve: Curves.fastOutSlowIn,
+
+  /// Width of the slider
   width: MediaQuery.of(context).size.width,
+
+  /// Height of the slider
   height: 220,
-  autoSlide: true,
-  allowManualSlide: true,
+
+  /// If automatic sliding is required
+  autoSlide: false,
+
+  /// Time for automatic sliding
   duration: new Duration(seconds: 6),
+
+  /// If manual sliding is required
+  allowManualSlide: true,
+
+  /// Children in slideView to slide
   children: links.map((String link) {
     return new ClipRRect(
         borderRadius: BorderRadius.circular(8.0),
@@ -41,7 +72,7 @@ ImageSlider(
           fit: BoxFit.fill,
         ));
   }).toList(),
-)
+),
 ```
 
 # License
@@ -94,7 +125,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'Flutter Demo Page'),
+      home: MyHomePage(title: 'Flutter Image Slider Demo Page'),
     );
   }
 }
@@ -108,11 +139,17 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MyHomePage>
+    with SingleTickerProviderStateMixin {
+  /// This pub allows you to make image_slider widget and also multiple other useful widgets like walkthrough etc.
+
   @override
   void initState() {
     super.initState();
+    tabController = TabController(length: 3, vsync: this);
   }
+
+  TabController tabController;
 
   static List<String> links = [
     "https://i.pinimg.com/originals/cc/18/8c/cc188c604e58cffd36e1d183c7198d21.jpg",
@@ -134,12 +171,43 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(10),
                   border: Border.all(width: 2)),
               child: ImageSlider(
+                /// Shows the tab indicating circles at the bottom
+                showTabIndicator: false,
+
+                /// Cutomize tab's colors
+                tabIndicatorColor: Colors.lightBlue,
+
+                /// Customize selected tab's colors
+                tabIndicatorSelectedColor: Color.fromARGB(255, 0, 0, 255),
+
+                /// Height of the indicators from the bottom
+                tabIndicatorHeight: 16,
+
+                /// Size of the tab indicator circles
+                tabIndicatorSize: 16,
+
+                /// tabController for walkthrough or other implementations
+                tabController: tabController,
+
+                /// Animation curves of sliding
                 curve: Curves.fastOutSlowIn,
+
+                /// Width of the slider
                 width: MediaQuery.of(context).size.width,
+
+                /// Height of the slider
                 height: 220,
-                autoSlide: true,
-                allowManualSlide: true,
+
+                /// If automatic sliding is required
+                autoSlide: false,
+
+                /// Time for automatic sliding
                 duration: new Duration(seconds: 6),
+
+                /// If manual sliding is required
+                allowManualSlide: true,
+
+                /// Children in slideView to slide
                 children: links.map((String link) {
                   return new ClipRRect(
                       borderRadius: BorderRadius.circular(8.0),
@@ -151,11 +219,50 @@ class _MyHomePageState extends State<MyHomePage> {
                       ));
                 }).toList(),
               ),
+            ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                tabController.index == 0
+                    ? Container(
+                        width: 0,
+                        height: 0,
+                      )
+                    : RaisedButton(
+                        onPressed: () {
+                          tabController.animateTo(tabController.index - 1);
+                          setState(() {});
+                        },
+                        child: Text("Previous"),
+                      ),
+                tabController.index == 2
+                    ? Container(
+                        width: 0,
+                        height: 0,
+                      )
+                    : RaisedButton(
+                        onPressed: () {
+                          tabController.animateTo(2);
+                          setState(() {});
+                        },
+                        child: Text("Skip"),
+                      ),
+                tabController.index == 2
+                    ? Container(
+                        width: 0,
+                        height: 0,
+                      )
+                    : RaisedButton(
+                        onPressed: () {
+                          tabController.animateTo(tabController.index + 1);
+                          setState(() {});
+                        },
+                        child: Text("Next"),
+                      ),
+              ],
             )
           ],
         ));
   }
 }
-
-
 ```
