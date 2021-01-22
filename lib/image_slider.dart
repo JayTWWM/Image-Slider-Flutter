@@ -42,7 +42,8 @@ class ImageSlider extends StatefulWidget {
   final TabController tabController;
 
   ImageSlider(
-      {@required this.children,
+      {Key key,
+      @required this.children,
       @required this.width,
       @required this.height,
       this.curve,
@@ -54,7 +55,7 @@ class ImageSlider extends StatefulWidget {
       this.autoSlide = false,
       this.showTabIndicator = false,
       @required this.tabController,
-      this.duration = const Duration(seconds: 3)});
+      this.duration = const Duration(seconds: 3)}) : super(key: key);
 
   @override
   _ImageSliderState createState() => _ImageSliderState();
@@ -66,11 +67,7 @@ class _ImageSliderState extends State<ImageSlider>
   @override
   void initState() {
     if (widget.autoSlide) {
-      timer = Timer.periodic(widget.duration, (Timer t) {
-        widget.tabController.animateTo(
-            (widget.tabController.index + 1) % widget.tabController.length,
-            curve: widget.curve);
-      });
+      _startTimer();
     }
     if (widget.allowManualSlide) {
       scrollPhysics = ScrollPhysics();
@@ -78,6 +75,31 @@ class _ImageSliderState extends State<ImageSlider>
       scrollPhysics = NeverScrollableScrollPhysics();
     }
     super.initState();
+  }
+
+  @override
+  void didUpdateWidget (ImageSlider oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    
+    if ((!widget.autoSlide) && (timer != null)) {
+      timer.cancel();
+      timer = null;
+    } else if ((widget.autoSlide) && (timer == null)) {
+      _startTimer();
+    }
+  }
+
+  _startTimer() {
+    timer = Timer.periodic(widget.duration, (Timer t) {
+      widget.tabController.animateTo(
+          (widget.tabController.index + 1) % widget.tabController.length,
+          curve: widget.curve);
+    });
+  }
+
+  dispose() {
+    timer?.cancel();
+    super.dispose();
   }
 
 //Declared Timer and physics.
