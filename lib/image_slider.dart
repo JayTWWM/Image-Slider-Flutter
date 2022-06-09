@@ -42,10 +42,10 @@ class ImageSlider extends StatefulWidget {
   final TabController tabController;
 
   ImageSlider(
-      {@required this.children,
-      @required this.width,
-      @required this.height,
-      this.curve,
+      {required this.children,
+      required this.width,
+      required this.height,
+      required this.curve,
       this.tabIndicatorColor = Colors.white,
       this.tabIndicatorSelectedColor = Colors.black,
       this.tabIndicatorSize = 12,
@@ -53,7 +53,7 @@ class ImageSlider extends StatefulWidget {
       this.allowManualSlide = true,
       this.autoSlide = false,
       this.showTabIndicator = false,
-      @required this.tabController,
+      required this.tabController,
       this.duration = const Duration(seconds: 3)});
 
   @override
@@ -81,8 +81,8 @@ class _ImageSliderState extends State<ImageSlider>
   }
 
 //Declared Timer and physics.
-  Timer timer;
-  ScrollPhysics scrollPhysics;
+  late Timer timer;
+  late ScrollPhysics scrollPhysics;
 
   @override
   Widget build(BuildContext context) {

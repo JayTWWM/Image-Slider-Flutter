@@ -5,7 +5,7 @@ author: Jay Mehta <jaymehta262001@gmail.com>
 homepage: https://github.com/JayTWWM/Image-Slider-Flutter
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.1 <3.0.0"
 
 dependencies:
   flutter:
