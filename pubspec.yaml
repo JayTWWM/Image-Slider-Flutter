@@ -1,11 +1,11 @@
 name: image_slider
 description: This pub lets you make a widget slider (automatic/manual sliding) with full customization. Mainly intended for image slider, this also accepts all other widgets.
-version: 1.0.2
+version: 1.0.3
 author: Jay Mehta <jaymehta262001@gmail.com>
 homepage: https://github.com/JayTWWM/Image-Slider-Flutter
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.1 <3.0.0"
 
 dependencies:
   flutter:

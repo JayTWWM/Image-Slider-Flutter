@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({ Key? key, required this.title}) : super(key: key);
 
   final String title;
 
@@ -39,7 +39,7 @@ class _MyHomePageState extends State<MyHomePage>
     tabController = TabController(length: 3, vsync: this);
   }
 
-  TabController tabController;
+  late TabController tabController;
 
   static List<String> links = [
     "https://i.pinimg.com/originals/cc/18/8c/cc188c604e58cffd36e1d183c7198d21.jpg",
